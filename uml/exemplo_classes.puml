@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+'Classes
+class Conta{
+    - numero: int
+    - titular: Cliente
+    - saldo: double
+    - limite: double
+    + sacar(valor)
+    + depositar(valor)
+    + ver_saldo()
+    + transferir(valor, Conta)
+}
+class Cliente{
+    - nome: str
+    - cpf: str
+}
+class Historico{
+    - transacoes: []
+}
+
+class Emprestimo{
+    - valor: double
+    - parcelas: int
+    - valor_parcela: double
+    - parcelas_restantes: int
+    - conta: Conta
+    + pagar_parcela()
+}
+class Agencia{
+    - nome: str
+    - status: boolean
+    - contas: []
+    + adicionar_conta(Conta)
+    + listar_contas()
+    + fechar_agencia()
+}
+'Relacionametos
+Cliente "0..1" -- "1..1" Conta : possui
+Conta "1..1" *-- "1..1" Historico
+Conta "1..1" o-- "0..*" Emprestimo
+Agencia "1..1" -- "0..*" Conta
+@enduml

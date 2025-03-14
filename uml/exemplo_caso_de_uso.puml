@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+left to right direction
+(Abrir Conta)
+usecase (Encerrar Conta)
+:Funcionário:
+'actor Cliente
+
+'Relacionar um ator com um caso de uso
+Cliente -- (Abrir Conta)
+Cliente -- (Encerrar Conta)
+Cliente -- (Sacar)
+Cliente -- (Depositar)
+(Abrir Conta) -- Funcionário
+(Encerrar Conta) -- Funcionário
+(Sacar) ..> (Registrar Movimento) : <<include>>
+(Depositar) ..> (Registrar Movimento) : <<include>>
+(Sacar) ..> (Encerrar Conta) : <<extend>>
+(Depositar) ..> (Encerrar Conta) : <<extend>>
+
+@enduml
