@@ -1,0 +1,43 @@
+@startuml
+abstract class Conta{
+    - numero: int
+    - titular: Cliente
+    - saldo: float
+    - extrato: Historico
+    + {abstract}atualizar(taxa: float)
+}
+
+class ContaPoupanca{
+    + atualizar(taxa: float)
+}
+class ContaCorrente{
+    + atualizar(taxa: float)
+    + valor_imposto()
+}
+
+class Banco{
+    - num: int
+    - nome: str
+    - contas: []
+}
+
+class SeguroDeVida{
+    - valor_seguro: float
+    + valor_imposto()
+}
+
+class ManipuladorDeTributaveis{
+    + calcular_imposto(TributavelMixin)
+}
+abstract class TributavelMixin{
+    + {abstract} valor_imposto()
+}
+
+Banco "1..1" --- "0..*" Conta
+Conta <|-- ContaPoupanca
+Conta <|-- ContaCorrente
+TributavelMixin <|-- SeguroDeVida
+TributavelMixin <|-- ContaCorrente
+
+
+@enduml
